@@ -2,33 +2,21 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
 	<meta charset="UTF-8">
-	<title>员工列表</title>
+	<title>角色列表</title>
+	<link rel="stylesheet" th:href="@{/static/css/index.css}" />
+	<script type="text/javascript" th:src="@{/static/js/index.js}"></script>
 </head>
 <body>
-	<table>
-		<tr>
-			<th>员工列表</th>
-		</tr>
-		<tr>
-			<th>序号</th>
-			<th>员工姓名</th>
-			<th>年龄</th>
-			<th>性别</th>
-			<th>邮箱</th>
-			<th>操作</th>
-		</tr>
-		<tr th:each="employee,status : ${list}">
-			<td th:text="${status.count}"></td>
-			<td th:text="${employee.empName}"></td>
-			<td th:text="${employee.age}"></td>
-			<td th:text="${employee.gender}"></td>
-			<td th:text="${employee.email}"></td>
-			<td>
-				<a href="">删除</a>
-				<a href="">修改</a>
-			</td>
-		</tr>
-		
-	</table>
+	<div>
+			角色列表
+	</div>
+	<div class="character-list">
+		<div class="character-item" th:each="employee : ${list}" th:object="${employee}">
+			<img th:id="*{id}" class="character-img" th:src="@{|/static/profile/*{profile}|}" alt="">
+		</div>
+	</div>
+	<div style="display:none" class="hold-character-item" th:each="employee : ${holdList}">
+		<div th:id="@{|h${employee.id}|}" th:text="${employee.id}"></div>
+	</div>
 </body>
 </html>

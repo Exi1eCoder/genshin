@@ -10,6 +10,7 @@ import com.zhaowei.genshin.mapper.EmployeeMapper;
 import com.zhaowei.genshin.pojo.Employee;
 import com.zhaowei.genshin.service.EmployeeService;
 
+
 @Service
 @Transactional
 public class EmployeeServiceImpl implements EmployeeService{
@@ -19,6 +20,11 @@ public class EmployeeServiceImpl implements EmployeeService{
 	@Override
 	public List<Employee> getAllEmployee() {
 		return employeeMapper.getAllEmployee() ;
+	}
+
+	@Override
+	public List<Employee> getHoldEmployeeByUid(Integer uid) {
+		return employeeMapper.getHoldEmployeeByUid(uid);
 	}
 
 }

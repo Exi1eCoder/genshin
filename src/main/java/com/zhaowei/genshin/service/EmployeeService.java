@@ -10,5 +10,8 @@ public interface EmployeeService {
 	 * @return
 	 */
 	List<Employee> getAllEmployee();
-
+	/**
+	 * 根据用户id查询持有角色信息
+	 */
+	List<Employee> getHoldEmployeeByUid(Integer uid);
 }

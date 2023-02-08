@@ -1,45 +1,42 @@
 package com.zhaowei.genshin.pojo;
 
 public class Employee {
-	private Integer eid;
-	private String empName;
-	private Integer age;
+	private Integer id;
+	private String name;
 	private String gender;
-	private String email;
+	private String attribute;
+	private String country;
+	private String profile;
+	private Integer status;
 	
 	public Employee() {}
 
-	public Employee(Integer eid, String empName, Integer age, String gender, String email) {
+	public Employee(Integer id, String name, String gender, String attribute, String country, String profile,
+			Integer status) {
 		super();
-		this.eid = eid;
-		this.empName = empName;
-		this.age = age;
+		this.id = id;
+		this.name = name;
 		this.gender = gender;
-		this.email = email;
+		this.attribute = attribute;
+		this.country = country;
+		this.profile = profile;
+		this.status = status;
 	}
 
-	public Integer getEid() {
-		return eid;
+	public Integer getId() {
+		return id;
 	}
 
-	public void setEid(Integer eid) {
-		this.eid = eid;
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
-	public String getEmpName() {
-		return empName;
+	public String getName() {
+		return name;
 	}
 
-	public void setEmpName(String empName) {
-		this.empName = empName;
-	}
-
-	public Integer getAge() {
-		return age;
-	}
-
-	public void setAge(Integer age) {
-		this.age = age;
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public String getGender() {
@@ -50,18 +47,36 @@ public class Employee {
 		this.gender = gender;
 	}
 
-	public String getEmail() {
-		return email;
+	public String getAttribute() {
+		return attribute;
 	}
 
-	public void setEmail(String email) {
-		this.email = email;
+	public void setAttribute(String attribute) {
+		this.attribute = attribute;
 	}
 
-	@Override
-	public String toString() {
-		return "Employee [eid=" + eid + ", empName=" + empName + ", age=" + age + ", gender=" + gender + ", email="
-				+ email + "]";
+	public String getCountry() {
+		return country;
+	}
+
+	public void setCountry(String country) {
+		this.country = country;
+	}
+
+	public String getProfile() {
+		return profile;
+	}
+
+	public void setProfile(String profile) {
+		this.profile = profile;
 	}
 	
+	public Integer getStatus() {
+		return status;
+	}
+
+	public void setStatus(Integer status) {
+		this.status = status;
+	}
+
 }

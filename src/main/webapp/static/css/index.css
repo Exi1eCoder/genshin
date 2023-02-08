@@ -1,0 +1,6 @@
+.character-item {
+	float:left;
+}
+.character-img {
+	filter: grayscale(80%);
+}

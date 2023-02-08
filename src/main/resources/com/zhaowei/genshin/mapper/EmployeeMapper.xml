@@ -5,6 +5,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="com.zhaowei.genshin.mapper.EmployeeMapper">
 	<!-- List<Employee> getAllEmployee(); -->
 	<select id="getAllEmployee" resultType="Employee">
-		select eid,emp_name,age,gender,email from t_emp
+		select id,name,gender,attribute,country,profile from employee
+	</select>
+	<!-- List<Employee> getHoldEmployeeByUid(String uid); -->
+	<select id="getHoldEmployeeByUid" resultType="Employee">
+		select t1.id from employee t1,employee_hold t2 where t1.id = t2.eid and t2.uid=#{uid}
 	</select>
 </mapper>
