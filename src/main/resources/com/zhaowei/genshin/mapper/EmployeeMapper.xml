@@ -9,6 +9,30 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	<!-- List<Employee> getHoldEmployeeByUid(String uid); -->
 	<select id="getHoldEmployeeByUid" resultType="Employee">
-		select t1.id from employee t1,employee_hold t2 where t1.id = t2.eid and t2.uid=#{uid}
+		select t1.id,t1.name,t1.gender,t1.attribute,t1.country,t2.e_status from employee t1,employee_hold t2 where t1.id = t2.eid and t2.uid=#{uid}
 	</select>
+	
+	<!-- Employee getEmployeeByEid(Integer id); -->
+	<select id="getEmployeeByEid" resultType="Employee">
+		select id,name,gender,attribute,country from employee where id=#{id};
+	</select>
+	
+	<resultMap id="empStatusMap" type="Employee" >
+		<id property="id" column="id"></id>
+		<result property="name" column="name"></result>
+		<result property="gender" column="gender"></result>
+		<result property="attribute" column="attribute"></result>
+		<result property="country" column="country"></result>
+		<result property="status" column="e_status"></result>
+	</resultMap>
+	
+	<!-- Employee getEmployeeStatusByEid(Integer uid, Integer id); -->
+	<select id="getEmployeeStatusByEid" resultMap="empStatusMap">
+		select t1.id,t1.name,t1.gender,t1.attribute,t1.country,t2.e_status from employee t1,employee_hold t2 where t1.id = t2.eid and t2.uid=#{uid} and t1.id=#{id};
+	</select>
+	
+	<!-- void insertSelective(Employee employee); -->
+	<insert id="insertSelective">
+		insert into employee values(0,#{name},#{gender},#{attribute},#{country},#{profile})
+	</insert>
 </mapper>

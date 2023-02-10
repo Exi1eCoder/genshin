@@ -19,5 +19,11 @@ public interface EmployeeMapper {
 	 * @return
 	 */
 	List<Employee> getHoldEmployeeByUid(@Param("uid")Integer uid);
+	
+	Employee getEmployeeByEid(@Param("id")Integer id);
+	
+	void insertSelective(Employee employee);
+	
+	Employee getEmployeeStatusByEid(@Param("uid")Integer uid,@Param("id") Integer id);
 
 }

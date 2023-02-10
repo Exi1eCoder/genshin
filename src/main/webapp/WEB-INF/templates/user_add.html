@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<title>角色管理：添加角色</title>
+</head>
+<body>
+	<h1>角色管理:添加角色</h1>
+	<span>欢迎你,<b th:text="${session.currUser.getUserName()}">张总</b></span>
+	<div>
+		<form th:action="@{addEmployee}" method="post">
+			<input type="hidden" name="method" value="addEmployee"> 
+				姓名：<input type="text" name="name"><br> 
+				性别：<select name="gender">
+						<option value="男">男</option>
+						<option value="女">女</option>
+					</select><br>
+				属性：<select name="attribute">
+						<option value="火">火</option>
+						<option value="水">水</option>
+						<option value="风">风</option>
+						<option value="雷">雷</option>
+						<option value="草">草</option>
+						<option value="冰">冰</option>
+						<option value="岩">岩</option>
+					</select><br>
+				地区：<input type="text" name="country"><br>
+				头像：<input type="text" name="profile"><br>
+				<button type="submit">提交</button>
+
+		</form>
+	</div>
+
+</body>
+</html>

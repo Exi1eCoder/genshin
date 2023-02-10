@@ -7,12 +7,16 @@
 	<script type="text/javascript" th:src="@{/static/js/index.js}"></script>
 </head>
 <body>
-	<div>
-			角色列表
-	</div>
+	<h1>角色列表</h1>
+	<span>欢迎你,<b th:text="${session.currUser.getUserName()}">张总</b></span>
+	<a th:href="@{userAddEmployee}">添加角色	</a>
+	<a th:href="@{item}">查询物品信息</a>
 	<div class="character-list">
 		<div class="character-item" th:each="employee : ${list}" th:object="${employee}">
+			<a th:href="@{'/employeeDetail/'+*{id}}">
+			<input type="hidden" name="id" th:value="*{id}"/>
 			<img th:id="*{id}" class="character-img" th:src="@{|/static/profile/*{profile}|}" alt="">
+			</a>
 		</div>
 	</div>
 	<div style="display:none" class="hold-character-item" th:each="employee : ${holdList}">

@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<title>角色详情</title>
+</head>
+<body>
+	<h1>角色详情</h1>
+	<span>欢迎你,<b th:text="${session.currUser.getUserName()}">张总</b></span>
+	<div th:object="${employee}">
+		角色名：<span th:text="*{name}"></span><br>
+		性  别：<span th:text="*{gender}"></span><br>
+		属  性：<span th:text="*{attribute}"></span><br>
+		地  区：<span th:text="*{country}"></span><br>
+		命  座：<span th:if="*{status} == -1" th:text="未拥有"></span>
+				<span th:unless="*{status} == -1" th:text="*{status}"></span>
+	</div>
+</body>
+</html>

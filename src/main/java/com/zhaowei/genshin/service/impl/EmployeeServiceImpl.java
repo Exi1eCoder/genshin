@@ -27,4 +27,19 @@ public class EmployeeServiceImpl implements EmployeeService{
 		return employeeMapper.getHoldEmployeeByUid(uid);
 	}
 
+	@Override
+	public void saveEmp(Employee employee) {
+		employeeMapper.insertSelective(employee);
+	}
+
+	@Override
+	public Employee getEmployeeByEId(Integer id) {
+		return employeeMapper.getEmployeeByEid(id);
+	}
+
+	@Override
+	public Employee getEmployeeStatusByEid(Integer uid, Integer id) {
+		return employeeMapper.getEmployeeStatusByEid(uid, id);
+	}
+
 }

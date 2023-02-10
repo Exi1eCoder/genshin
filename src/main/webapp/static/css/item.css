@@ -1,0 +1,19 @@
+#item-table {
+	width: 60%;
+	line-height: 20px;
+	margin-top: 60px;
+	margin-left: 20%;
+}
+
+#item-table, #item-table tr, #item-table th, #item-table td{
+	border: 1px solid black;
+	border-collapse: collapse;
+	text-align:center;
+	font-family:"黑体";
+	font-weight:lighter;
+	color: black;
+}
+.item-img {
+	width:30px;
+	height:30px
+}

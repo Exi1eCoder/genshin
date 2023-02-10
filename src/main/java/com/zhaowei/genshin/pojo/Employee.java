@@ -7,7 +7,7 @@ public class Employee {
 	private String attribute;
 	private String country;
 	private String profile;
-	private Integer status;
+	private Integer status = -1;
 	
 	public Employee() {}
 
