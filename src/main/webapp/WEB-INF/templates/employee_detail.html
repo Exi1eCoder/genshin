@@ -6,7 +6,7 @@
 </head>
 <body>
 	<h1>角色详情</h1>
-	<span>欢迎你,<b th:text="${session.currUser.getUserName()}">张总</b></span>
+	<span>欢迎你,<b th:text="${session.currUser.getUserName()}">旅行者</b></span>
 	<div th:object="${employee}">
 		角色名：<span th:text="*{name}"></span><br>
 		性  别：<span th:text="*{gender}"></span><br>
@@ -14,6 +14,42 @@
 		地  区：<span th:text="*{country}"></span><br>
 		命  座：<span th:if="*{status} == -1" th:text="未拥有"></span>
 				<span th:unless="*{status} == -1" th:text="*{status}"></span>
+	</div>
+	<h1>角色突破</h1>
+	<h3>20级突破：</h3>
+	<div th:each="item : ${listLevel1}" th:object="${item}">
+		<span th:text="*{itemName}">燃愿玛瑙碎屑</span>
+		<span th:text="@{'*'} + *{required}">*3</span>
+	</div>
+	<h3>40级突破：</h3>
+	<div th:each="item : ${listLevel2}" th:object="${item}">
+		<span th:text="*{itemName}">燃愿玛瑙碎屑</span>
+		<span th:text="@{'*'} + *{required}">*3</span>
+	</div>
+	<h3>50级突破：</h3>
+	<div th:each="item : ${listLevel3}" th:object="${item}">
+		<span th:text="*{itemName}">燃愿玛瑙碎屑</span>
+		<span th:text="@{'*'} + *{required}">*3</span>
+	</div>
+	<h3>60级突破：</h3>
+	<div th:each="item : ${listLevel4}" th:object="${item}">
+		<span th:text="*{itemName}">燃愿玛瑙碎屑</span>
+		<span th:text="@{'*'} + *{required}">*3</span>
+	</div>
+	<h3>70级突破：</h3>
+	<div th:each="item : ${listLevel5}" th:object="${item}">
+		<span th:text="*{itemName}">燃愿玛瑙碎屑</span>
+		<span th:text="@{'*'} + *{required}">*3</span>
+	</div>
+	<h3>80级突破：</h3>
+	<div th:each="item : ${listLevel6}" th:object="${item}">
+		<span th:text="*{itemName}">燃愿玛瑙碎屑</span>
+		<span th:text="@{'*'} + *{required}">*3</span>
+	</div>
+	<h3>材料总计：</h3>
+	<div th:each="item : ${totalItemList}" th:object="${item}">
+		<span th:text="*{itemName}">燃愿玛瑙碎屑</span>
+		<span th:text="@{'*'} + *{required}">*3</span>
 	</div>
 </body>
 </html>

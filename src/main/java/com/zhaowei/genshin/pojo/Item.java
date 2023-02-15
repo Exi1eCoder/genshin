@@ -1,6 +1,6 @@
 package com.zhaowei.genshin.pojo;
 
-public class Item {
+public class Item implements Cloneable{
 	private Integer id;
 	private String itemName;
 	private Integer type;
@@ -78,4 +78,7 @@ public class Item {
 		this.hold = hold;
 	}
 	
+	public Item clone() throws CloneNotSupportedException {
+		return(Item) super.clone();
+	}
 }

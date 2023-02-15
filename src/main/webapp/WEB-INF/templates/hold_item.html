@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<title>持有物品列表</title>
+	<link rel="stylesheet" th:href="@{/static/css/item.css}" />
+	<!-- <script type="text/javascript" th:src="@{/static/js/index.js}"></script> -->
+</head>
+<body>
+	<h1>持有物品一览</h1>
+	<span>欢迎你,<b th:text="${session.currUser.getUserName()}">旅行者</b></span>
+	<a th:href="@{updateHoldItem}">更新持有信息</a>
+	<div id="item-table">
+		<table>
+			<tr>
+				<th></th>
+				<th>物品名称</th>
+				<th>需求</th>
+				<th>持有</th>
+			</tr>
+			<tr th:each="item : ${list}" th:object="${item}">
+				<td><img th:id="*{id}" class="item-img" th:src="@{|/static/img/*{img}|}" alt=""></td>
+				<td th:text="*{itemName}"></td>
+				<td th:text="*{required}"></td>
+				<td th:text="*{hold}"></td>
+			</tr>
+		</table>
+	</div>
+</body>
+</html>

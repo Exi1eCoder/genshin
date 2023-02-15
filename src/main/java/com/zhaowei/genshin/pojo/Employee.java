@@ -1,5 +1,7 @@
 package com.zhaowei.genshin.pojo;
 
+import java.util.List;
+
 public class Employee {
 	private Integer id;
 	private String name;
@@ -8,11 +10,13 @@ public class Employee {
 	private String country;
 	private String profile;
 	private Integer status = -1;
+	private Integer level;
+	private List<Item> itemList;
 	
 	public Employee() {}
 
 	public Employee(Integer id, String name, String gender, String attribute, String country, String profile,
-			Integer status) {
+			Integer status, Integer level) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -21,6 +25,7 @@ public class Employee {
 		this.country = country;
 		this.profile = profile;
 		this.status = status;
+		this.level = level;
 	}
 
 	public Integer getId() {
@@ -77,6 +82,22 @@ public class Employee {
 
 	public void setStatus(Integer status) {
 		this.status = status;
+	}
+
+	public Integer getLevel() {
+		return level;
+	}
+
+	public void setLevel(Integer level) {
+		this.level = level;
+	}
+
+	public List<Item> getItemList() {
+		return itemList;
+	}
+
+	public void setItemList(List<Item> itemList) {
+		this.itemList = itemList;
 	}
 
 }

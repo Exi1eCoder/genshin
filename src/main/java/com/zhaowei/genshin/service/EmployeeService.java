@@ -3,6 +3,7 @@ package com.zhaowei.genshin.service;
 import java.util.List;
 
 import com.zhaowei.genshin.pojo.Employee;
+import com.zhaowei.genshin.pojo.Item;
 
 public interface EmployeeService {
 	/**
@@ -33,5 +34,4 @@ public interface EmployeeService {
 	 * @param id2 
 	 */
 	Employee getEmployeeStatusByEid(Integer uid, Integer id);
-	
 }

@@ -10,4 +10,27 @@ public interface ItemService {
 	 * @return
 	 */
 	List<Item> getAllItem();
+	
+	/**
+	 * 查询当前用户持有的物品信息
+	 * @param uid
+	 * @return
+	 */
+	List<Item> getHoldItemById(Integer uid);
+	
+	/**
+	 * 根据角色等级查询角色突破物品
+	 * @param currEmp 
+	 * @param empid, level
+	 * @return
+	 */
+	List<Item> queryRequireItemByLevel(Integer id, Integer level);
+	
+	/**
+	 * 现有物品列表相同物品数量合并
+	 * 物品总计
+	 * @param totalItemList
+	 * @return
+	 */
+	List<Item> solveTotalRequireItem(List<Item> list, List<Item> totalItemList);
 }

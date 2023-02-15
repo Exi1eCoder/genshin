@@ -7,6 +7,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -42,7 +43,7 @@ public class UserController {
 		return "index";
 	}
 
-	@RequestMapping("/userAddEmployee")
+	@GetMapping("/userAddEmployee")
 	public String userAddEmployee() {
 		return "user_add";
 	}
@@ -55,12 +56,12 @@ public class UserController {
 		String country = request.getParameter("country");
 		String profile = request.getParameter("profile");
 		User user = (User) session.getAttribute("currUser");
-		employeeService.saveEmp(new Employee(0, name, gender, attribute, country, profile, 0));
+		employeeService.saveEmp(new Employee(0, name, gender, attribute, country, profile, 0, null));
 		queryEmployee(request, user);
 		return "employee_list";
 	}
 	
-	public void queryEmployee(HttpServletRequest request, User user) {
+	private void queryEmployee(HttpServletRequest request, User user) {
 		List<Employee> list = employeeService.getAllEmployee();
 		//当前用户持有的角色
 		List<Employee> holdList = employeeService.getHoldEmployeeByUid(user.getId());

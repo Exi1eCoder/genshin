@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 import com.zhaowei.genshin.pojo.Employee;
+import com.zhaowei.genshin.pojo.Item;
 
 public interface EmployeeMapper {
 
@@ -25,5 +26,4 @@ public interface EmployeeMapper {
 	void insertSelective(Employee employee);
 	
 	Employee getEmployeeStatusByEid(@Param("uid")Integer uid,@Param("id") Integer id);
-
 }
