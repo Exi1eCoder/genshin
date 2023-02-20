@@ -1,7 +1,5 @@
 package com.zhaowei.genshin.controller;
 
-import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -26,8 +24,6 @@ public class UserController {
 	
 	/**
 	 * 登录页面，验证用户登录，
-	 * 登录成功，查询所有角色，
-	 * 并根据employee_hold表查询已有角色
 	 * 登录失败则回到登录页面
 	 * @param request
 	 * @return
@@ -37,8 +33,10 @@ public class UserController {
 		User user = userService.login(loginUser, loginPwd);
 		session.setAttribute("currUser", user);
 		if(user != null) {
-			queryEmployee(request, user);
-			return "employee_list";
+//			queryEmployee(request, user);
+			//使用重定向是防止刷新重复提交表单
+			//重定向并非地址，而是/employee请求
+			return "redirect:/employee";
 		}
 		return "index";
 	}
@@ -55,18 +53,17 @@ public class UserController {
 		String attribute = request.getParameter("attribute");
 		String country = request.getParameter("country");
 		String profile = request.getParameter("profile");
-		User user = (User) session.getAttribute("currUser");
 		employeeService.saveEmp(new Employee(0, name, gender, attribute, country, profile, 0, null));
-		queryEmployee(request, user);
-		return "employee_list";
+//		queryEmployee(request, user);
+		return "redirect:/employee";
 	}
 	
-	private void queryEmployee(HttpServletRequest request, User user) {
-		List<Employee> list = employeeService.getAllEmployee();
-		//当前用户持有的角色
-		List<Employee> holdList = employeeService.getHoldEmployeeByUid(user.getId());
-		request.setAttribute("list", list);
-		request.setAttribute("holdList", holdList);
-	}
+//	private void queryEmployee(HttpServletRequest request, User user) {
+//		List<Employee> list = employeeService.getAllEmployee();
+//		//当前用户持有的角色
+//		List<Employee> holdList = employeeService.getHoldEmployeeByUid(user.getId());
+//		request.setAttribute("list", list);
+//		request.setAttribute("holdList", holdList);
+//	}
 	
 }
