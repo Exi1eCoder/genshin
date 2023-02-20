@@ -20,11 +20,6 @@ import com.zhaowei.genshin.pojo.User;
 import com.zhaowei.genshin.service.EmployeeService;
 import com.zhaowei.genshin.service.ItemService;
 
-
-/**
- * 
- * 
- */
 @Controller
 public class EmployeeController {
 	@Autowired
@@ -34,11 +29,16 @@ public class EmployeeController {
 	private ItemService itemService;
 	
 	@RequestMapping(value = "/employee", method = RequestMethod.GET)
-	public String getAllEmployee(Model model) {
+	public String getAllEmployee(HttpSession session, Model model) {
+		User user = (User) session.getAttribute("currUser");
 		//查询所有的员工信息
-		List<Employee> list = employeeService.getAllEmployee();
 		//将角色信息在请求域中共享
+		List<Employee> list = employeeService.getAllEmployee();
 		model.addAttribute("list", list);
+		if(user != null) {
+			List<Employee> holdList = employeeService.getHoldEmployeeByUid(user.getId());
+			model.addAttribute("holdList", holdList);
+		}
 		//跳转到employee_list.html
 		return "employee_list";
 	}

@@ -8,7 +8,9 @@
 </head>
 <body>
 	<h1>角色列表</h1>
-	<span>欢迎你,<b th:text="${session.currUser.getUserName()}">旅行者</b></span>
+	<span>欢迎你,<b th:if="${session.currUser != null}" th:text="${session.currUser.getUserName()}">旅行者</b>
+				<b th:unless="${session.currUser != null}" th:text="旅行者">旅行者</b>
+	</span>
 	<a th:href="@{userAddEmployee}">添加角色	</a>
 	<a th:href="@{userHoldItem}">背包信息</a>
 	<a th:href="@{item}">物品图鉴</a>

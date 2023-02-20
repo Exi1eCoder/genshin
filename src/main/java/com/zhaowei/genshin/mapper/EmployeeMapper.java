@@ -5,7 +5,6 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 import com.zhaowei.genshin.pojo.Employee;
-import com.zhaowei.genshin.pojo.Item;
 
 public interface EmployeeMapper {
 
