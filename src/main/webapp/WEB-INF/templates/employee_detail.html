@@ -8,11 +8,17 @@
 <body>
 	<h1>角色详情</h1>
 	<span>欢迎你,<b th:text="${session.currUser.getUserName()}">旅行者</b></span>
+	<div id="employee_list">
+		<a th:href="@{returnEmployeelist}">返回角色列表</a>
+	</div>
 	<div id="insertLink">
 		<a th:if="${employee.status} == -1" @click="insertEmployee" th:href="@{'/userAddEmployee/'+${employee.id}}">添加关注</a>
 	</div>
 	<div id="deleteLink">
 		<a th:unless="${employee.status} == -1" @click="deleteEmployee" th:href="@{'/deleteEmployee/'+${employee.id}}">取消关注</a>
+	</div>
+	<div id="upgradePlan">
+		<a th:unless="${employee.status} == -1" th:href="@{'/currEmpReq/'+${employee.id}}">升级计划</a>
 	</div>
 	<form id="insertForm" method="post">
 		<input type="hidden">
@@ -21,6 +27,7 @@
 		<input type="hidden" name="_method" value="delete">
 	</form>
 	<div th:object="${employee}">
+		<span><img th:id="*{id}" th:src="@{|/static/profile/*{profile}|}" alt=""></span><br>
 		角色名：<span th:text="*{name}"></span><br>
 		性  别：<span th:text="*{gender}"></span><br>
 		属  性：<span th:text="*{attribute}"></span><br>
@@ -59,7 +66,7 @@
 		<span th:text="*{itemName}">燃愿玛瑙碎屑</span>
 		<span th:text="@{'*'} + *{required}">*3</span>
 	</div>
-	<h3>材料总计：</h3>
+	<h3>突破素材总计：</h3>
 	<div id="item-table">
 		<table>
 			<tr>
@@ -74,7 +81,67 @@
 			</tr>
 		</table>
 	</div>
-	
+	<h1>天赋升级</h1>
+	<h3>天赋升级1-2</h3>
+	<div th:each="item : ${listSkillLevel1}" th:object="${item}">
+		<span th:text="*{itemName}">自由的教导</span>
+		<span th:text="@{'*'} + *{required}">*3</span>
+	</div>
+	<h3>天赋升级2-3</h3>
+	<div th:each="item : ${listSkillLevel2}" th:object="${item}">
+		<span th:text="*{itemName}">自由的教导</span>
+		<span th:text="@{'*'} + *{required}">*3</span>
+	</div>
+	<h3>天赋升级3-4</h3>
+	<div th:each="item : ${listSkillLevel3}" th:object="${item}">
+		<span th:text="*{itemName}">自由的教导</span>
+		<span th:text="@{'*'} + *{required}">*3</span>
+	</div>
+	<h3>天赋升级4-5</h3>
+	<div th:each="item : ${listSkillLevel4}" th:object="${item}">
+		<span th:text="*{itemName}">自由的教导</span>
+		<span th:text="@{'*'} + *{required}">*3</span>
+	</div>
+	<h3>天赋升级5-6</h3>
+	<div th:each="item : ${listSkillLevel5}" th:object="${item}">
+		<span th:text="*{itemName}">自由的教导</span>
+		<span th:text="@{'*'} + *{required}">*3</span>
+	</div>
+	<h3>天赋升级6-7</h3>
+	<div th:each="item : ${listSkillLevel6}" th:object="${item}">
+		<span th:text="*{itemName}">自由的教导</span>
+		<span th:text="@{'*'} + *{required}">*3</span>
+	</div>
+	<h3>天赋升级7-8</h3>
+	<div th:each="item : ${listSkillLevel7}" th:object="${item}">
+		<span th:text="*{itemName}">自由的教导</span>
+		<span th:text="@{'*'} + *{required}">*3</span>
+	</div>
+	<h3>天赋升级8-9</h3>
+	<div th:each="item : ${listSkillLevel8}" th:object="${item}">
+		<span th:text="*{itemName}">自由的教导</span>
+		<span th:text="@{'*'} + *{required}">*3</span>
+	</div>
+	<h3>天赋升级9-10</h3>
+	<div th:each="item : ${listSkillLevel9}" th:object="${item}">
+		<span th:text="*{itemName}">自由的教导</span>
+		<span th:text="@{'*'} + *{required}">*3</span>
+	</div>
+	<h3>天赋升级总计：</h3>
+	<div id="item-table">
+		<table>
+			<tr>
+				<th></th>
+				<th>物品名称</th>
+				<th>需求</th>
+			</tr>
+			<tr th:each="item : ${totalSkillItemList}" th:object="${item}">
+				<td><img th:id="*{id}" class="item-img" th:src="@{|/static/img/*{img}|}" alt=""></td>
+				<td th:text="*{itemName}"></td>
+				<td th:text="*{required}"></td>
+			</tr>
+		</table>
+	</div>
 		<!-- 2.删除超链接绑定点击事件 -->
 	<!-- 引入vue.js -->
 	<script type="text/javascript" th:src="@{/static/js/vue.js}"></script>

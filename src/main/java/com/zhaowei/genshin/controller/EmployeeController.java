@@ -31,7 +31,7 @@ public class EmployeeController {
 	@Autowired
 	private ItemService itemService;
 	
-	@RequestMapping(value = "/employee", method = RequestMethod.GET)
+	@GetMapping("/employee")
 	public String getAllEmployee(HttpSession session, Model model) {
 		User user = (User) session.getAttribute("currUser");
 		//查询所有的员工信息
@@ -46,23 +46,49 @@ public class EmployeeController {
 		return "employee_list";
 	}
 	
-//	@RequestMapping(value = "/employeeDetail/{id}", method = RequestMethod.GET)
 	@GetMapping("/employeeDetail/{id}")
 	public String getEmployeeById(HttpSession session,HttpServletRequest request,@PathVariable("id") Integer id) {
 		//获得当前用户id
-		User user = (User) session.getAttribute("currUser");
-		Integer uid = user.getId();
+		Integer uid = getCurrUserId(session);
 		//根据角色ID查询拥有角色及状态
 		Employee currEmp = employeeService.getEmployeeStatusByEid(uid, id);
-		//若当前用户持有则curEmp不为空
-		if(currEmp != null) {
-			beforeReturnPage(request, currEmp, id);
-			return "employee_detail";
+		//若当前用户未持有则curEmp为空，那么直接根据eid获取角色
+		if(currEmp == null) {
+			currEmp = employeeService.getEmployeeByEId(id);
 		}
-		//若用户未持有该角色
-		currEmp = employeeService.getEmployeeByEId(id);
 		beforeReturnPage(request, currEmp, id);
 		return "employee_detail";
+	}
+	
+	/**
+	 * 详情页面取消关注
+	 */
+	@DeleteMapping("/deleteEmployee/{id}")
+	public String deleteEmployee(HttpSession session,HttpServletRequest request,@PathVariable("id") Integer id) {
+		Integer uid = getCurrUserId(session);
+		employeeService.deleteEmployeeHoldByEid(uid, id);
+		return "redirect:/employeeDetail/{id}";
+	}
+	
+	/**
+	 * 详情页面添加关注
+	 */
+	@PostMapping("/userAddEmployee/{id}")
+	public String userAddEmployee(HttpSession session,HttpServletRequest request,@PathVariable("id") Integer id){
+		Integer uid = getCurrUserId(session);
+		employeeService.insertEmployeeHoldByEid(uid, id);
+		return "redirect:/employeeDetail/{id}";
+	}
+	
+	/**
+	 * 计算角色素材消耗
+	 */
+	@GetMapping("/currEmpReq/{id}")
+	public String userCurrEmpItemRequired(HttpSession session, HttpServletRequest request,@PathVariable("id") Integer id) {
+		Integer uid = getCurrUserId(session);
+		Employee employee = employeeService.getCurrEmpLevel(uid, id);
+		request.setAttribute("employee", employee);
+		return "employee_level";
 	}
 	
 	/**
@@ -78,6 +104,7 @@ public class EmployeeController {
 		 * 系统设置6个等级
 		 */
 		List<Item> totalItemList = new ArrayList<>();
+		List<Item> totalSkillItemList = new ArrayList<>();
 		for(int i = 1; i < 7; i++) {
 			List<Item> list = new ArrayList<>();
 			list = itemService.queryRequireItemByLevel(id, i);
@@ -85,28 +112,26 @@ public class EmployeeController {
 			request.setAttribute("listLevel" + i, list);
 		}
 		request.setAttribute("totalItemList", totalItemList);
+		/**
+		 * 查询角色天赋等级所需物品
+		 * 系统设置9个等级
+		 */
+		for(int i = 1; i < 10; i++) {
+			List<Item> list = new ArrayList<>();
+			list = itemService.queryRequireSkillItemByLevel(id, i);
+			itemService.solveTotalRequireItem(list, totalSkillItemList);
+			request.setAttribute("listSkillLevel" + i, list);
+		}
+		request.setAttribute("totalSkillItemList", totalSkillItemList);
 	}
 	
 	/**
-	 * 详情页面取消关注
+	 * 获取当前session用户id 
+	 * @param session
+	 * @return
 	 */
-	@DeleteMapping("/deleteEmployee/{id}")
-	public String deleteEmployee(HttpSession session,HttpServletRequest request,@PathVariable("id") Integer id) {
+	private Integer getCurrUserId(HttpSession session) {
 		User user = (User) session.getAttribute("currUser");
-		Integer uid = user.getId();
-		employeeService.deleteEmployeeHoldByEid(uid, id);
-		return "redirect:/employee";
+		return user.getId();
 	}
-	
-	/**
-	 * 详情页面添加关注
-	 */
-	@PostMapping("/userAddEmployee/{id}")
-	public String userAddEmployee(HttpSession session,HttpServletRequest request,@PathVariable("id") Integer id){
-		User user = (User) session.getAttribute("currUser");
-		Integer uid = user.getId();
-		employeeService.insertEmployeeHoldByEid(uid, id);
-		return "redirect:/employee";
-	}
-	
 }

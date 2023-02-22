@@ -16,8 +16,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</resultMap>
 	<!-- List<Item> queryRequireItemByLevel(Integer id, Integer level); -->
 	<select id="queryRequireItemByLevel" resultMap="itemRequiredMap">
-		select t1.item_id,t1.required,t2.item_name,t2.img from emp_item_req t1,item t2 where t1.item_id = t2.id and t1.emp_id = #{id} and t1.level = #{level};
+		select t1.item_id,t1.required,t2.item_name,t2.img from emp_item_req t1,item t2 where t1.item_id = t2.id and t1.type = 0 and t1.emp_id = #{id} and t1.level = #{level};
 	</select>
+	
+	<!-- List<Item> queryRequireSkillItemByLevel(@Param("id")Integer id,@Param("level")Integer level); -->
+	<select id="queryRequireSkillItemByLevel" resultMap="itemRequiredMap">
+		select t1.item_id,t1.required,t2.item_name,t2.img from emp_item_req t1,item t2 where t1.item_id = t2.id and t1.type = 1 and t1.emp_id = #{id} and t1.level = #{level};
+	</select>
+	
 	
 	<resultMap id="itemholdMap" type="Item" >
 		<id property="id" column="id"></id>

@@ -22,11 +22,14 @@ public interface EmployeeMapper {
 	
 	Employee getEmployeeByEid(@Param("id")Integer id);
 	
-	void insertSelective(Employee employee);
-	
 	Employee getEmployeeStatusByEid(@Param("uid")Integer uid,@Param("id") Integer id);
+	
+	Employee getCurrEmpLevel(@Param("uid")Integer uid,@Param("eid") Integer eid);
+	
+	void insertSelective(Employee employee);
 	
 	void deleteEmployeeHoldByEid(@Param("uid")Integer uid,@Param("eid") Integer eid);
 	
 	void insertEmployeeHoldByEid(@Param("uid")Integer uid,@Param("eid") Integer eid);
+	
 }

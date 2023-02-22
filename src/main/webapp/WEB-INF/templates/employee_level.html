@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>素材消耗</title>
+</head>
+<body>
+	<h1>角色等级设置</h1>
+	<div th:object="${employee}">
+		<span><img th:id="*{id}"
+			th:src="@{|/static/profile/*{profile}|}" alt=""></span><br> 
+			角色名：<span th:text="*{name}"></span><br> 
+			角色等级：<span th:text="*{currLevel}"></span>~<span th:text="*{tarLevel}"></span><br> 
+			普通攻击：<span th:text="*{currSkill1Level}"></span>~<span th:text="*{tarSkill1Level}"></span><br> 
+			元素战技：<span th:text="*{currSkill2Level}"></span>~<span th:text="*{tarSkill2Level}"></span><br> 
+			元素爆发：<span th:text="*{currSkill3Level}"></span>~<span th:text="*{tarSkill3Level}"></span><br>
+	</div>
+	<h3>升级计划</h3>
+	<div>
+		<form action="">
+			角色等级：<select name="originLevel">
+				<option value="0">0</option>
+				<option value="1">40</option>
+				<option value="2">50</option>
+				<option value="3">60</option>
+				<option value="4">70</option>
+				<option value="5">80</option>
+				<option value="6">90</option>
+			</select> ~ <select name="targetLevel">
+				<option value="0">0</option>
+				<option value="1">40</option>
+				<option value="2">50</option>
+				<option value="3">60</option>
+				<option value="4">70</option>
+				<option value="5">80</option>
+				<option value="6">90</option>
+			</select><br> 普通攻击：<select name="skill1OriginLevel">
+				<option value="1">1</option>
+				<option value="2">2</option>
+				<option value="3">3</option>
+				<option value="4">4</option>
+				<option value="5">5</option>
+				<option value="6">6</option>
+				<option value="7">7</option>
+				<option value="8">8</option>
+				<option value="9">9</option>
+				<option value="10">10</option>
+			</select> ~ <select name="skill1TargetLevel">
+				<option value="1">1</option>
+				<option value="2">2</option>
+				<option value="3">3</option>
+				<option value="4">4</option>
+				<option value="5">5</option>
+				<option value="6">6</option>
+				<option value="7">7</option>
+				<option value="8">8</option>
+				<option value="9">9</option>
+				<option value="10">10</option>
+			</select><br> 元素战技：<select name="skill2OriginLevel">
+				<option value="1">1</option>
+				<option value="2">2</option>
+				<option value="3">3</option>
+				<option value="4">4</option>
+				<option value="5">5</option>
+				<option value="6">6</option>
+				<option value="7">7</option>
+				<option value="8">8</option>
+				<option value="9">9</option>
+				<option value="10">10</option>
+			</select> ~ <select name="skill2TargetLevel">
+				<option value="1">1</option>
+				<option value="2">2</option>
+				<option value="3">3</option>
+				<option value="4">4</option>
+				<option value="5">5</option>
+				<option value="6">6</option>
+				<option value="7">7</option>
+				<option value="8">8</option>
+				<option value="9">9</option>
+				<option value="10">10</option>
+			</select><br> 元素爆发：<select name="skill3OriginLevel">
+				<option value="1">1</option>
+				<option value="2">2</option>
+				<option value="3">3</option>
+				<option value="4">4</option>
+				<option value="5">5</option>
+				<option value="6">6</option>
+				<option value="7">7</option>
+				<option value="8">8</option>
+				<option value="9">9</option>
+				<option value="10">10</option>
+			</select> ~ <select name="skill3TargetLevel">
+				<option value="1">1</option>
+				<option value="2">2</option>
+				<option value="3">3</option>
+				<option value="4">4</option>
+				<option value="5">5</option>
+				<option value="6">6</option>
+				<option value="7">7</option>
+				<option value="8">8</option>
+				<option value="9">9</option>
+				<option value="10">10</option>
+			</select><br>
+			<button type="submit">计算</button>
+
+		</form>
+	</div>
+
+	<h3>角色消耗：</h3>
+	<div>
+		<table>
+			<tr th:each="item : ${totalCharItemList}" th:object="${item}">
+				<td><img th:id="*{id}" class="item-img"
+					th:src="@{|/static/img/*{img}|}" alt=""></td>
+				<td th:text="*{itemName}"></td>
+				<td th:text="*{required}"></td>
+			</tr>
+		</table>
+	</div>
+
+	<h3>天赋消耗：</h3>
+	<div>
+		<table>
+			<tr th:each="item : ${totalSkillItemList}" th:object="${item}">
+				<td><img th:id="*{id}" class="item-img"
+					th:src="@{|/static/img/*{img}|}" alt=""></td>
+				<td th:text="*{itemName}"></td>
+				<td th:text="*{required}"></td>
+			</tr>
+		</table>
+	</div>
+
+	<h3>素材总计：</h3>
+	<div>
+		<table>
+			<tr th:each="item : ${totalItemList}" th:object="${item}">
+				<td><img th:id="*{id}" class="item-img"
+					th:src="@{|/static/img/*{img}|}" alt=""></td>
+				<td th:text="*{itemName}"></td>
+				<td th:text="*{required}"></td>
+			</tr>
+		</table>
+		<button>提交</button>
+	</div>
+</body>
+</html>

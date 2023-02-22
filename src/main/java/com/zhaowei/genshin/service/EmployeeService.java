@@ -39,4 +39,6 @@ public interface EmployeeService {
 	void deleteEmployeeHoldByEid(Integer uid, Integer eid);
 	
 	void insertEmployeeHoldByEid(Integer uid, Integer id);
+	
+	Employee getCurrEmpLevel(Integer uid, Integer id);
 }

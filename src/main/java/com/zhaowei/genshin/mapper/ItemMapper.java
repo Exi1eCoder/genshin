@@ -23,4 +23,12 @@ public interface ItemMapper {
 	 * @return
 	 */
 	List<Item> getHoldItemById(@Param("uid")Integer uid);
+
+	/**
+	 * 根据角色id查询各个天赋等级所需物品
+	 * @param id
+	 * @param level
+	 * @return
+	 */
+	List<Item> queryRequireSkillItemByLevel(@Param("id")Integer id,@Param("level")Integer level);
 }

@@ -14,21 +14,42 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<!-- Employee getEmployeeByEid(Integer id); -->
 	<select id="getEmployeeByEid" resultType="Employee">
-		select id,name,gender,attribute,country from employee where id=#{id};
+		select id,name,gender,attribute,country,profile from employee where id=#{id};
 	</select>
 	
 	<resultMap id="empStatusMap" type="Employee" >
 		<id property="id" column="id"></id>
 		<result property="name" column="name"></result>
+		<result property="profile" column="profile"></result>
 		<result property="gender" column="gender"></result>
 		<result property="attribute" column="attribute"></result>
 		<result property="country" column="country"></result>
 		<result property="status" column="e_status"></result>
 	</resultMap>
-	
+
 	<!-- Employee getEmployeeStatusByEid(Integer uid, Integer id); -->
 	<select id="getEmployeeStatusByEid" resultMap="empStatusMap">
-		select t1.id,t1.name,t1.gender,t1.attribute,t1.country,t2.e_status from employee t1,employee_hold t2 where t1.id = t2.eid and t2.uid=#{uid} and t1.id=#{id};
+		select t1.id,t1.name,t1.profile,t1.gender,t1.attribute,t1.country,t2.e_status from employee t1,employee_hold t2 where t1.id = t2.eid and t2.uid=#{uid} and t1.id=#{id}
+	</select>
+	
+		
+	<resultMap id="empLevelMap" type="Employee" >
+		<id property="id" column="id"></id>
+		<result property="name" column="name"></result>
+		<result property="profile" column="profile"></result>
+		<result property="currLevel" column="curr_lv"></result>
+		<result property="tarLevel" column="tar_lv"></result>
+		<result property="currSkill1Level" column="s1_curr_lv"></result>
+		<result property="tarSkill1Level" column="s1_tar_lv"></result>
+		<result property="currSkill2Level" column="s2_curr_lv"></result>
+		<result property="tarSkill2Level" column="s2_tar_lv"></result>
+		<result property="currSkill3Level" column="s3_curr_lv"></result>
+		<result property="tarSkill3Level" column="s3_tar_lv"></result>
+	</resultMap>
+	
+	<!-- Employee getCurrEmpLevel(@Param("uid")Integer uid,@Param("eid") Integer eid); -->
+	<select id="getCurrEmpLevel" resultMap="empLevelMap">
+		select t1.id,t1.name,t1.profile,t2.curr_lv,t2.tar_lv,t2.s1_curr_lv,t2.s1_tar_lv,t2.s2_curr_lv,t2.s2_tar_lv,t2.s3_curr_lv,t2.s3_tar_lv from employee t1,employee_hold t2 where t1.id = t2.eid and uid=#{uid} and eid=#{eid}
 	</select>
 	
 	<!-- void insertSelective(Employee employee); -->
@@ -38,12 +59,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<!-- void deleteEmployeeHoldByEid(@Param("uid")Integer uid,@Param("eid") Integer eid); -->
 	<delete id="deleteEmployeeHoldByEid">
-		delete from employee_hold where id in (select a.id from (select id from employee_hold where uid = #{uid} and eid = #{eid})a);
+		delete from employee_hold where id in (select a.id from (select id from employee_hold where uid = #{uid} and eid = #{eid})a)
 	</delete>
 	
 	<!-- void insertEmployeeHoldByEid(@Param("uid")Integer uid,@Param("eid") Integer eid); -->
 	<insert id="insertEmployeeHoldByEid">
-		insert into employee_hold (uid, eid, e_status) VALUES (#{uid}, #{eid}, 0);
+		insert into employee_hold (uid, eid, e_status) values (#{uid}, #{eid}, 0)
 	</insert>
 	
 </mapper>

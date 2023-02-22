@@ -27,6 +27,14 @@ public interface ItemService {
 	List<Item> queryRequireItemByLevel(Integer id, Integer level);
 	
 	/**
+	 * 根据天赋等级查询角色天赋突破物品
+	 * @param id
+	 * @param level
+	 * @return
+	 */
+	List<Item> queryRequireSkillItemByLevel(Integer id, Integer level);
+	
+	/**
 	 * 现有物品列表相同物品数量合并
 	 * 物品总计
 	 * @param totalItemList

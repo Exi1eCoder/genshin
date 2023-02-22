@@ -25,12 +25,27 @@ public class ItemServiceImpl implements ItemService{
 		return itemMapper.getAllItem();
 	}
 
+	/**
+	 * 查询角色突破各等级所需物品
+	 */
 	@Override
 	public List<Item> queryRequireItemByLevel(Integer id, Integer level) {
 		return itemMapper.queryRequireItemByLevel(id, level);
 	}
-
+	
+	/**
+	 * 查询天赋突破各等级所需物品
+	 */
 	@Override
+	public List<Item> queryRequireSkillItemByLevel(Integer id, Integer level) {
+		return itemMapper.queryRequireSkillItemByLevel(id, level);
+	}
+
+	/**
+	 * 此方法将物品列表相同物品的需求数量合并
+	 * list物品列表
+	 * totalItemList相同物品数合计
+	 */
 	public List<Item> solveTotalRequireItem(List<Item> list, List<Item> totalItemList) {
 		Map<Integer, Item> map = new HashMap<>();
 		List<Item> cloneList = new ArrayList<>();

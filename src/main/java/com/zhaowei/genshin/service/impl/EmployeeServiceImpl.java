@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.zhaowei.genshin.mapper.EmployeeMapper;
 import com.zhaowei.genshin.pojo.Employee;
 import com.zhaowei.genshin.service.EmployeeService;
+import com.zhaowei.genshin.utils.LevelMap;
 
 
 @Service
@@ -56,6 +57,14 @@ public class EmployeeServiceImpl implements EmployeeService{
 	@Override
 	public void insertEmployeeHoldByEid(Integer uid, Integer eid) {
 		employeeMapper.insertEmployeeHoldByEid(uid, eid);
+	}
+
+	@Override
+	public Employee getCurrEmpLevel(Integer uid, Integer eid) {
+		Employee employee = employeeMapper.getCurrEmpLevel(uid, eid);
+		employee.setCurrLevel(LevelMap.levelMap.get(employee.getCurrLevel()));
+		employee.setTarLevel(LevelMap.levelMap.get(employee.getTarLevel()));
+		return employee;
 	}
 
 }

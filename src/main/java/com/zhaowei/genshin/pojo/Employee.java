@@ -10,7 +10,15 @@ public class Employee {
 	private String country;
 	private String profile;
 	private Integer status = -1;
-	private Integer level;
+	private Integer currLevel = 0;
+	private Integer tarLevel = 0;
+	private Integer currSkill1Level = 1;
+	private Integer tarSkill1Level = 1;
+	private Integer currSkill2Level = 1;
+	private Integer tarSkill2Level = 1;
+	private Integer currSkill3Level = 1;
+	private Integer tarSkill3Level = 1;
+	
 	private List<Item> itemList;
 	
 	public Employee() {}
@@ -25,7 +33,6 @@ public class Employee {
 		this.country = country;
 		this.profile = profile;
 		this.status = status;
-		this.level = level;
 	}
 
 	public Integer getId() {
@@ -84,12 +91,68 @@ public class Employee {
 		this.status = status;
 	}
 
-	public Integer getLevel() {
-		return level;
+	public Integer getCurrLevel() {
+		return currLevel;
 	}
 
-	public void setLevel(Integer level) {
-		this.level = level;
+	public void setCurrLevel(Integer currLevel) {
+		this.currLevel = currLevel;
+	}
+
+	public Integer getTarLevel() {
+		return tarLevel;
+	}
+
+	public void setTarLevel(Integer tarLevel) {
+		this.tarLevel = tarLevel;
+	}
+
+	public Integer getCurrSkill1Level() {
+		return currSkill1Level;
+	}
+
+	public void setCurrSkill1Level(Integer currSkill1Level) {
+		this.currSkill1Level = currSkill1Level;
+	}
+
+	public Integer getTarSkill1Level() {
+		return tarSkill1Level;
+	}
+
+	public void setTarSkill1Level(Integer tarSkill1Level) {
+		this.tarSkill1Level = tarSkill1Level;
+	}
+
+	public Integer getCurrSkill2Level() {
+		return currSkill2Level;
+	}
+
+	public void setCurrSkill2Level(Integer currSkill2Level) {
+		this.currSkill2Level = currSkill2Level;
+	}
+
+	public Integer getTarSkill2Level() {
+		return tarSkill2Level;
+	}
+
+	public void setTarSkill2Level(Integer tarSkill2Level) {
+		this.tarSkill2Level = tarSkill2Level;
+	}
+
+	public Integer getCurrSkill3Level() {
+		return currSkill3Level;
+	}
+
+	public void setCurrSkill3Level(Integer currSkill3Level) {
+		this.currSkill3Level = currSkill3Level;
+	}
+
+	public Integer getTarSkill3Level() {
+		return tarSkill3Level;
+	}
+
+	public void setTarSkill3Level(Integer tarSkill3Level) {
+		this.tarSkill3Level = tarSkill3Level;
 	}
 
 	public List<Item> getItemList() {
@@ -99,5 +162,5 @@ public class Employee {
 	public void setItemList(List<Item> itemList) {
 		this.itemList = itemList;
 	}
-
+	
 }
