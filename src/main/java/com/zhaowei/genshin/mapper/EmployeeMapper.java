@@ -25,4 +25,8 @@ public interface EmployeeMapper {
 	void insertSelective(Employee employee);
 	
 	Employee getEmployeeStatusByEid(@Param("uid")Integer uid,@Param("id") Integer id);
+	
+	void deleteEmployeeHoldByEid(@Param("uid")Integer uid,@Param("eid") Integer eid);
+	
+	void insertEmployeeHoldByEid(@Param("uid")Integer uid,@Param("eid") Integer eid);
 }

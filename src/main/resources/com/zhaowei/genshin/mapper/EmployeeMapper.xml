@@ -35,4 +35,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<insert id="insertSelective">
 		insert into employee values(0,#{name},#{gender},#{attribute},#{country},#{profile})
 	</insert>
+	
+	<!-- void deleteEmployeeHoldByEid(@Param("uid")Integer uid,@Param("eid") Integer eid); -->
+	<delete id="deleteEmployeeHoldByEid">
+		delete from employee_hold where id in (select a.id from (select id from employee_hold where uid = #{uid} and eid = #{eid})a);
+	</delete>
+	
+	<!-- void insertEmployeeHoldByEid(@Param("uid")Integer uid,@Param("eid") Integer eid); -->
+	<insert id="insertEmployeeHoldByEid">
+		insert into employee_hold (uid, eid, e_status) VALUES (#{uid}, #{eid}, 0);
+	</insert>
+	
 </mapper>

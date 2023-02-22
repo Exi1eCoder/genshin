@@ -2,6 +2,8 @@ package com.zhaowei.genshin.service;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import com.zhaowei.genshin.pojo.Employee;
 
 public interface EmployeeService {
@@ -19,7 +21,7 @@ public interface EmployeeService {
 	 * 保存角色
 	 * @param employee
 	 */
-	void saveEmp(Employee employee);
+	void saveEmp(HttpServletRequest request);
 	
 	/**
 	 * 根据角色Id查询角色
@@ -33,4 +35,8 @@ public interface EmployeeService {
 	 * @param id2 
 	 */
 	Employee getEmployeeStatusByEid(Integer uid, Integer id);
+	
+	void deleteEmployeeHoldByEid(Integer uid, Integer eid);
+	
+	void insertEmployeeHoldByEid(Integer uid, Integer id);
 }

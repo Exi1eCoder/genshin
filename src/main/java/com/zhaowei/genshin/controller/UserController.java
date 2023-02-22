@@ -41,20 +41,14 @@ public class UserController {
 		return "index";
 	}
 
-	@GetMapping("/userAddEmployee")
-	public String userAddEmployee() {
+	@GetMapping("/adminAddEmployee")
+	public String adminAddEmployee() {
 		return "user_add";
 	}
 	
 	@RequestMapping(value = "/addEmployee", method = RequestMethod.POST)
-	public String addEmployee(HttpServletRequest request, HttpSession session) {
-		String name = request.getParameter("name");
-		String gender = request.getParameter("gender");
-		String attribute = request.getParameter("attribute");
-		String country = request.getParameter("country");
-		String profile = request.getParameter("profile");
-		employeeService.saveEmp(new Employee(0, name, gender, attribute, country, profile, 0, null));
-//		queryEmployee(request, user);
+	public String addEmployee(HttpServletRequest request) {
+		employeeService.saveEmp(request);
 		return "redirect:/employee";
 	}
 	

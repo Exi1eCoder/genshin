@@ -12,10 +12,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<id property="id" column="item_id"></id>
 		<result property="required" column="required"></result>
 		<result property="itemName" column="item_name"></result>
+		<result property="img" column="img"></result>
 	</resultMap>
 	<!-- List<Item> queryRequireItemByLevel(Integer id, Integer level); -->
 	<select id="queryRequireItemByLevel" resultMap="itemRequiredMap">
-		select t1.item_id,t1.required,t2.item_name from emp_item_req t1,item t2 where t1.item_id = t2.id and t1.emp_id = #{id} and t1.level = #{level};
+		select t1.item_id,t1.required,t2.item_name,t2.img from emp_item_req t1,item t2 where t1.item_id = t2.id and t1.emp_id = #{id} and t1.level = #{level};
 	</select>
 	
 	<resultMap id="itemholdMap" type="Item" >
@@ -27,6 +28,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</resultMap>
 	<!-- List<Item> getHoldItemById(@Param("uid")Integer uid); -->
 	<select id="getHoldItemById" resultMap="itemholdMap">
-		select t1.id,t1.item_name,t1.img,t2.hold,t2.curr_req from item t1, user_item_hold t2 where t1.id = t2.item_id and uid = #{uid};
+		select t1.id,t1.item_name,t1.img,t2.hold,t2.curr_req from item t1 left join user_item_hold t2 on t1.id = t2.item_id and uid = #{uid};
 	</select>
 </mapper>

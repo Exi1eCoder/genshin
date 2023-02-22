@@ -3,10 +3,23 @@
 <head>
 	<meta charset="UTF-8">
 	<title>角色详情</title>
+	<link rel="stylesheet" th:href="@{/static/css/item.css}" />
 </head>
 <body>
 	<h1>角色详情</h1>
 	<span>欢迎你,<b th:text="${session.currUser.getUserName()}">旅行者</b></span>
+	<div id="insertLink">
+		<a th:if="${employee.status} == -1" @click="insertEmployee" th:href="@{'/userAddEmployee/'+${employee.id}}">添加关注</a>
+	</div>
+	<div id="deleteLink">
+		<a th:unless="${employee.status} == -1" @click="deleteEmployee" th:href="@{'/deleteEmployee/'+${employee.id}}">取消关注</a>
+	</div>
+	<form id="insertForm" method="post">
+		<input type="hidden">
+	</form>
+	<form id="deleteForm" method="post">
+		<input type="hidden" name="_method" value="delete">
+	</form>
 	<div th:object="${employee}">
 		角色名：<span th:text="*{name}"></span><br>
 		性  别：<span th:text="*{gender}"></span><br>
@@ -47,9 +60,52 @@
 		<span th:text="@{'*'} + *{required}">*3</span>
 	</div>
 	<h3>材料总计：</h3>
-	<div th:each="item : ${totalItemList}" th:object="${item}">
-		<span th:text="*{itemName}">燃愿玛瑙碎屑</span>
-		<span th:text="@{'*'} + *{required}">*3</span>
+	<div id="item-table">
+		<table>
+			<tr>
+				<th></th>
+				<th>物品名称</th>
+				<th>需求</th>
+			</tr>
+			<tr th:each="item : ${totalItemList}" th:object="${item}">
+				<td><img th:id="*{id}" class="item-img" th:src="@{|/static/img/*{img}|}" alt=""></td>
+				<td th:text="*{itemName}"></td>
+				<td th:text="*{required}"></td>
+			</tr>
+		</table>
 	</div>
+	
+		<!-- 2.删除超链接绑定点击事件 -->
+	<!-- 引入vue.js -->
+	<script type="text/javascript" th:src="@{/static/js/vue.js}"></script>
+	<!-- 通过vue处理点击事件 -->
+	<script type="text/javascript">
+		var insertVue = new Vue({
+			el:"#insertLink",
+			methods:{
+				insertEmployee:function(event){
+					//获取ID跟据ID获取表单
+					var insertForm = document.getElementById("insertForm");
+					//将触发点击事件的超链接的href属性赋值给表单的action
+					insertForm.action = event.target.href;
+					//提交表单
+					insertForm.submit();
+					//取消超链接的默认行为
+					event.preventDefault();
+				}
+			}
+		});
+		var deleteVue = new Vue({
+			el:"#deleteLink",
+			methods:{
+				deleteEmployee:function(event){
+					var deleteForm = document.getElementById("deleteForm");
+					deleteForm.action = event.target.href;
+					deleteForm.submit();
+					event.preventDefault();
+				}
+			}
+		});
+	</script>
 </body>
 </html>

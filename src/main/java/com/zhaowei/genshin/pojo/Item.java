@@ -6,7 +6,7 @@ public class Item implements Cloneable{
 	private Integer type;
 	private Integer grade;
 	private String img;
-	private Integer required;
+	private Integer required = 0;
 	private Integer hold = 0;
 	
 	public Item() {}

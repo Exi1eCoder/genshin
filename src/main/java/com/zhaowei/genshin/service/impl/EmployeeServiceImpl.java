@@ -2,6 +2,8 @@ package com.zhaowei.genshin.service.impl;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -26,7 +28,13 @@ public class EmployeeServiceImpl implements EmployeeService{
 	}
 
 	@Override
-	public void saveEmp(Employee employee) {
+	public void saveEmp(HttpServletRequest request) {
+		String name = request.getParameter("name");
+		String gender = request.getParameter("gender");
+		String attribute = request.getParameter("attribute");
+		String country = request.getParameter("country");
+		String profile = request.getParameter("profile");
+		Employee employee = new Employee(null,name,gender,attribute,country,profile,null,null);
 		employeeMapper.insertSelective(employee);
 	}
 
@@ -38,6 +46,16 @@ public class EmployeeServiceImpl implements EmployeeService{
 	@Override
 	public Employee getEmployeeStatusByEid(Integer uid, Integer id) {
 		return employeeMapper.getEmployeeStatusByEid(uid, id);
+	}
+
+	@Override
+	public void deleteEmployeeHoldByEid(Integer uid, Integer eid) {
+		employeeMapper.deleteEmployeeHoldByEid(uid, eid);
+	}
+
+	@Override
+	public void insertEmployeeHoldByEid(Integer uid, Integer eid) {
+		employeeMapper.insertEmployeeHoldByEid(uid, eid);
 	}
 
 }
