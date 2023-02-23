@@ -1,6 +1,7 @@
 package com.zhaowei.genshin.mapper;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Param;
 
@@ -28,8 +29,26 @@ public interface EmployeeMapper {
 	
 	void insertSelective(Employee employee);
 	
-	void deleteEmployeeHoldByEid(@Param("uid")Integer uid,@Param("eid") Integer eid);
+	/**
+	 * 根据ID删除employee_hold表数据
+	 * @param id
+	 */
+	void deleteEmployeeHoldById(Integer id);
 	
 	void insertEmployeeHoldByEid(@Param("uid")Integer uid,@Param("eid") Integer eid);
 	
+	/**
+	 * 根据id更新employee_hold表信息
+	 * @param Employee
+	 * @param uid
+	 */
+	void updateLevelToEmpHold(Map<String, Object> map);
+	
+	/**
+	 * 根据Uid,eid查询employee_hold表ID
+	 * @param uid
+	 * @param eid
+	 * @return
+	 */
+	Integer queryEmpHoldIdByUidEid(@Param("uid")Integer uid,@Param("eid") Integer eid);
 }

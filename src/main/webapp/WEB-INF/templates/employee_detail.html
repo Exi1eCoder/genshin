@@ -8,9 +8,6 @@
 <body>
 	<h1>角色详情</h1>
 	<span>欢迎你,<b th:text="${session.currUser.getUserName()}">旅行者</b></span>
-	<div id="employee_list">
-		<a th:href="@{returnEmployeelist}">返回角色列表</a>
-	</div>
 	<div id="insertLink">
 		<a th:if="${employee.status} == -1" @click="insertEmployee" th:href="@{'/userAddEmployee/'+${employee.id}}">添加关注</a>
 	</div>

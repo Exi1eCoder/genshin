@@ -5,6 +5,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 import com.zhaowei.genshin.pojo.Employee;
+import com.zhaowei.genshin.pojo.Item;
 
 public interface EmployeeService {
 	/**
@@ -41,4 +42,10 @@ public interface EmployeeService {
 	void insertEmployeeHoldByEid(Integer uid, Integer id);
 	
 	Employee getCurrEmpLevel(Integer uid, Integer id);
+	
+	void updateLevelToEmpHold(Employee employee, Integer uid);
+	
+	List<Item> calUpgradeItemReq(Employee employee);
+	
+	List<Item> calSkillUpItemReq(Employee employee);
 }

@@ -14,14 +14,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.zhaowei.genshin.pojo.Employee;
 import com.zhaowei.genshin.pojo.Item;
 import com.zhaowei.genshin.pojo.User;
 import com.zhaowei.genshin.service.EmployeeService;
 import com.zhaowei.genshin.service.ItemService;
+import com.zhaowei.genshin.utils.LevelMap;
 
 @Controller
 public class EmployeeController {
@@ -87,7 +86,32 @@ public class EmployeeController {
 	public String userCurrEmpItemRequired(HttpSession session, HttpServletRequest request,@PathVariable("id") Integer id) {
 		Integer uid = getCurrUserId(session);
 		Employee employee = employeeService.getCurrEmpLevel(uid, id);
+		List<Item> totalUpgradeItemList = employeeService.calUpgradeItemReq(employee);
+		List<Item> totalSkillUpItemList = employeeService.calSkillUpItemReq(employee);
+		List<Item> totalItemList = new ArrayList<>();
+		itemService.solveTotalRequireItem(totalUpgradeItemList, totalItemList);
+		itemService.solveTotalRequireItem(totalSkillUpItemList, totalItemList);
+		request.setAttribute("totalUpgradeItemList", totalUpgradeItemList);
+		request.setAttribute("totalSkillUpItemList", totalSkillUpItemList);
+		request.setAttribute("totalItemList", totalItemList);
+		getRealLevel(employee);
 		request.setAttribute("employee", employee);
+		return "employee_level";
+	}
+	
+	@PutMapping("/calItemReq")
+	public String calItemReq(HttpSession session, HttpServletRequest request,Employee employee) {
+		Integer uid = getCurrUserId(session);
+		employeeService.updateLevelToEmpHold(employee, uid);
+		List<Item> totalUpgradeItemList = employeeService.calUpgradeItemReq(employee);
+		List<Item> totalSkillUpItemList = employeeService.calSkillUpItemReq(employee);
+		List<Item> totalItemList = new ArrayList<>();
+		itemService.solveTotalRequireItem(totalUpgradeItemList, totalItemList);
+		itemService.solveTotalRequireItem(totalSkillUpItemList, totalItemList);
+		request.setAttribute("totalUpgradeItemList", totalUpgradeItemList);
+		request.setAttribute("totalSkillUpItemList", totalSkillUpItemList);
+		request.setAttribute("totalItemList", totalItemList);
+		getRealLevel(employee);
 		return "employee_level";
 	}
 	
@@ -97,7 +121,7 @@ public class EmployeeController {
 	 * @param currEmp
 	 * @param id
 	 */
-	private void beforeReturnPage(HttpServletRequest request, Employee currEmp,Integer id) {
+	private void beforeReturnPage(HttpServletRequest request, Employee currEmp, Integer id) {
 		request.setAttribute("employee", currEmp);
 		/**
 		 * 查询角色各等级突破所需物品
@@ -133,5 +157,11 @@ public class EmployeeController {
 	private Integer getCurrUserId(HttpSession session) {
 		User user = (User) session.getAttribute("currUser");
 		return user.getId();
+	}
+	
+	private Employee getRealLevel(Employee employee) {
+		employee.setCurrLevel(LevelMap.levelMap.get(employee.getCurrLevel()));
+		employee.setTarLevel(LevelMap.levelMap.get(employee.getTarLevel()));
+		return employee;
 	}
 }

@@ -162,5 +162,14 @@ public class Employee {
 	public void setItemList(List<Item> itemList) {
 		this.itemList = itemList;
 	}
-	
+
+	@Override
+	public String toString() {
+		return "Employee [id=" + id + ", name=" + name + ", gender=" + gender + ", attribute=" + attribute
+				+ ", country=" + country + ", profile=" + profile + ", status=" + status + ", currLevel=" + currLevel
+				+ ", tarLevel=" + tarLevel + ", currSkill1Level=" + currSkill1Level + ", tarSkill1Level="
+				+ tarSkill1Level + ", currSkill2Level=" + currSkill2Level + ", tarSkill2Level=" + tarSkill2Level
+				+ ", currSkill3Level=" + currSkill3Level + ", tarSkill3Level=" + tarSkill3Level + ", itemList="
+				+ itemList + "]";
+	}
 }

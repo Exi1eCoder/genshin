@@ -57,9 +57,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		insert into employee values(0,#{name},#{gender},#{attribute},#{country},#{profile})
 	</insert>
 	
-	<!-- void deleteEmployeeHoldByEid(@Param("uid")Integer uid,@Param("eid") Integer eid); -->
-	<delete id="deleteEmployeeHoldByEid">
-		delete from employee_hold where id in (select a.id from (select id from employee_hold where uid = #{uid} and eid = #{eid})a)
+	<!-- void deleteEmployeeHoldById(Integer id); -->
+	<delete id="deleteEmployeeHoldById">
+		delete from employee_hold where id = #{id}
 	</delete>
 	
 	<!-- void insertEmployeeHoldByEid(@Param("uid")Integer uid,@Param("eid") Integer eid); -->
@@ -67,4 +67,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		insert into employee_hold (uid, eid, e_status) values (#{uid}, #{eid}, 0)
 	</insert>
 	
+	<!-- Integer queryEmpHoldIdByUidEid(@Param("uid")Integer uid,@Param("eid") Integer eid); -->
+	<select id="queryEmpHoldIdByUidEid" resultType="Integer">
+		select id from employee_hold where uid = #{uid} and eid = #{eid}
+	</select>
+	
+	<!-- void updateLevelToEmpHold(Employee Employee); -->
+	<update id="updateLevelToEmpHold">
+		update employee_hold SET curr_lv=#{currLevel}, tar_lv=#{tarLevel}, s1_curr_lv=#{currSkill1Level}, s1_tar_lv=#{tarSkill1Level}, s2_curr_lv=#{currSkill2Level}, s2_tar_lv=#{tarSkill2Level}, s3_curr_lv=#{currSkill3Level}, s3_tar_lv=#{tarSkill3Level} where id = #{id}
+	</update>
 </mapper>
