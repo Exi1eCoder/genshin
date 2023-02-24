@@ -47,10 +47,8 @@ public class EmployeeController {
 	
 	@GetMapping("/employeeDetail/{id}")
 	public String getEmployeeById(HttpSession session,HttpServletRequest request,@PathVariable("id") Integer id) {
-		//获得当前用户id
-		Integer uid = getCurrUserId(session);
 		//根据角色ID查询拥有角色及状态
-		Employee currEmp = employeeService.getEmployeeStatusByEid(uid, id);
+		Employee currEmp = employeeService.getEmployeeStatusByEid(getCurrUserId(session), id);
 		//若当前用户未持有则curEmp为空，那么直接根据eid获取角色
 		if(currEmp == null) {
 			currEmp = employeeService.getEmployeeByEId(id);
@@ -64,8 +62,7 @@ public class EmployeeController {
 	 */
 	@DeleteMapping("/deleteEmployee/{id}")
 	public String deleteEmployee(HttpSession session,HttpServletRequest request,@PathVariable("id") Integer id) {
-		Integer uid = getCurrUserId(session);
-		employeeService.deleteEmployeeHoldByEid(uid, id);
+		employeeService.deleteEmployeeHoldByEid(getCurrUserId(session), id);
 		return "redirect:/employeeDetail/{id}";
 	}
 	
@@ -74,8 +71,7 @@ public class EmployeeController {
 	 */
 	@PostMapping("/userAddEmployee/{id}")
 	public String userAddEmployee(HttpSession session,HttpServletRequest request,@PathVariable("id") Integer id){
-		Integer uid = getCurrUserId(session);
-		employeeService.insertEmployeeHoldByEid(uid, id);
+		employeeService.insertEmployeeHoldByEid(getCurrUserId(session), id);
 		return "redirect:/employeeDetail/{id}";
 	}
 	
@@ -83,9 +79,8 @@ public class EmployeeController {
 	 * 计算角色素材消耗
 	 */
 	@GetMapping("/currEmpReq/{id}")
-	public String userCurrEmpItemRequired(HttpSession session, HttpServletRequest request,@PathVariable("id") Integer id) {
-		Integer uid = getCurrUserId(session);
-		Employee employee = employeeService.getCurrEmpLevel(uid, id);
+	public String userCurrEmpItemRequired(HttpSession session, HttpServletRequest request, @PathVariable("id") Integer id) {
+		Employee employee = employeeService.getCurrEmpLevel(getCurrUserId(session), id);
 		List<Item> totalUpgradeItemList = employeeService.calUpgradeItemReq(employee);
 		List<Item> totalSkillUpItemList = employeeService.calSkillUpItemReq(employee);
 		List<Item> totalItemList = new ArrayList<>();
@@ -99,20 +94,10 @@ public class EmployeeController {
 		return "employee_level";
 	}
 	
-	@PutMapping("/calItemReq")
-	public String calItemReq(HttpSession session, HttpServletRequest request,Employee employee) {
-		Integer uid = getCurrUserId(session);
-		employeeService.updateLevelToEmpHold(employee, uid);
-		List<Item> totalUpgradeItemList = employeeService.calUpgradeItemReq(employee);
-		List<Item> totalSkillUpItemList = employeeService.calSkillUpItemReq(employee);
-		List<Item> totalItemList = new ArrayList<>();
-		itemService.solveTotalRequireItem(totalUpgradeItemList, totalItemList);
-		itemService.solveTotalRequireItem(totalSkillUpItemList, totalItemList);
-		request.setAttribute("totalUpgradeItemList", totalUpgradeItemList);
-		request.setAttribute("totalSkillUpItemList", totalSkillUpItemList);
-		request.setAttribute("totalItemList", totalItemList);
-		getRealLevel(employee);
-		return "employee_level";
+	@PutMapping("/calItemReq/{id}")
+	public String calItemReq(HttpSession session, HttpServletRequest request, Employee employee, @PathVariable("id") Integer id) {
+		employeeService.updateLevelToEmpHold(employee, getCurrUserId(session));
+		return "redirect:/currEmpReq/{id}";
 	}
 	
 	/**

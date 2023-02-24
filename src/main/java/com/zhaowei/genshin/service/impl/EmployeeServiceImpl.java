@@ -73,7 +73,7 @@ public class EmployeeServiceImpl implements EmployeeService{
 	}
 
 	/**
-	 * 更新页面所提交的等级
+	 * 等级更新页面所提交的等级
 	 */
 	@Override
 	public void updateLevelToEmpHold(Employee employee, Integer uid) {
@@ -97,10 +97,10 @@ public class EmployeeServiceImpl implements EmployeeService{
 	@Override
 	public List<Item> calUpgradeItemReq(Employee employee) {
 		List<Item> totalUpgradeItemList = new ArrayList<>();
-		Integer currLevel = employee.getCurrLevel();
-		Integer tarLevel = employee.getTarLevel();
+		Integer currLevel = employee.getCurrLevel() + 1;
+		Integer tarLevel = employee.getTarLevel() + 1;
 		if(currLevel < tarLevel) {
-			for(int i = (currLevel+1); i < (tarLevel+1); i++) {
+			for(int i = currLevel; i < tarLevel; i++) {
 				List<Item> list = new ArrayList<>();
 				list = itemService.queryRequireItemByLevel(employee.getId(), i);
 				itemService.solveTotalRequireItem(list, totalUpgradeItemList);
@@ -108,12 +108,10 @@ public class EmployeeServiceImpl implements EmployeeService{
 		}
 		return totalUpgradeItemList;
 	}
-
 	
 	/**
 	 * 计算技能升级所需素材
 	 */
-	
 	@Override
 	public List<Item> calSkillUpItemReq(Employee employee) {
 		List<Item> totalList = new ArrayList<>();

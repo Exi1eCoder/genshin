@@ -18,93 +18,91 @@
 		</div>
 		<h3>升级计划</h3>
 		<div>
-			<form th:action="@{/calItemReq}" method="post">
+			<form th:action="@{'/calItemReq/'+${employee.id}}" method="post">
 				<input type="hidden" name="_method" value="put">
 				<input type="hidden" name="id" th:value="${employee.id}">
-				<input type="hidden" name="name" th:value="${employee.name}">
-				<input type="hidden" name="profile" th:value="${employee.profile}">
 				角色等级：<select name="currLevel">
-					<option value="0">0</option>
-					<option value="1">40</option>
-					<option value="2">50</option>
-					<option value="3">60</option>
-					<option value="4">70</option>
-					<option value="5">80</option>
-					<option value="6">90</option>
+					<option th:selected="${{employee.currLevel}} eq '0'" value="0">0</option>
+					<option th:selected="${{employee.currLevel}} eq '40'" value="1">40</option>
+					<option th:selected="${{employee.currLevel}} eq '50'" value="2">50</option>
+					<option th:selected="${{employee.currLevel}} eq '60'" value="3">60</option>
+					<option th:selected="${{employee.currLevel}} eq '70'" value="4">70</option>
+					<option th:selected="${{employee.currLevel}} eq '80'" value="5">80</option>
+					<option th:selected="${{employee.currLevel}} eq '90'" value="6">90</option>
 				</select> ~ <select name="tarLevel">
-					<option value="0">0</option>
-					<option value="1">40</option>
-					<option value="2">50</option>
-					<option value="3">60</option>
-					<option value="4">70</option>
-					<option value="5">80</option>
-					<option value="6">90</option>
+					<option th:selected="${{employee.tarLevel}} eq '0'" value="0">0</option>
+					<option th:selected="${{employee.tarLevel}} eq '40'" value="1">40</option>
+					<option th:selected="${{employee.tarLevel}} eq '50'" value="2">50</option>
+					<option th:selected="${{employee.tarLevel}} eq '60'" value="3">60</option>
+					<option th:selected="${{employee.tarLevel}} eq '70'" value="4">70</option>
+					<option th:selected="${{employee.tarLevel}} eq '80'" value="5">80</option>
+					<option th:selected="${{employee.tarLevel}} eq '90'" value="6">90</option>
 				</select><br> 普通攻击：<select name="currSkill1Level">
-					<option value="1">1</option>
-					<option value="2">2</option>
-					<option value="3">3</option>
-					<option value="4">4</option>
-					<option value="5">5</option>
-					<option value="6">6</option>
-					<option value="7">7</option>
-					<option value="8">8</option>
-					<option value="9">9</option>
-					<option value="10">10</option>
+					<option th:selected="${{employee.currSkill1Level}} eq '1'" value="1">1</option>
+					<option th:selected="${{employee.currSkill1Level}} eq '2'" value="2">2</option>
+					<option th:selected="${{employee.currSkill1Level}} eq '3'" value="3">3</option>
+					<option th:selected="${{employee.currSkill1Level}} eq '4'" value="4">4</option>
+					<option th:selected="${{employee.currSkill1Level}} eq '5'" value="5">5</option>
+					<option th:selected="${{employee.currSkill1Level}} eq '6'" value="6">6</option>
+					<option th:selected="${{employee.currSkill1Level}} eq '7'" value="7">7</option>
+					<option th:selected="${{employee.currSkill1Level}} eq '8'" value="8">8</option>
+					<option th:selected="${{employee.currSkill1Level}} eq '9'" value="9">9</option>
+					<option th:selected="${{employee.currSkill1Level}} eq '10'" value="10">10</option>
 				</select> ~ <select name="tarSkill1Level">
-					<option value="1">1</option>
-					<option value="2">2</option>
-					<option value="3">3</option>
-					<option value="4">4</option>
-					<option value="5">5</option>
-					<option value="6">6</option>
-					<option value="7">7</option>
-					<option value="8">8</option>
-					<option value="9">9</option>
-					<option value="10">10</option>
+					<option th:selected="${{employee.tarSkill1Level}} eq '1'" value="1">1</option>
+					<option th:selected="${{employee.tarSkill1Level}} eq '2'" value="2">2</option>
+					<option th:selected="${{employee.tarSkill1Level}} eq '3'" value="3">3</option>
+					<option th:selected="${{employee.tarSkill1Level}} eq '4'" value="4">4</option>
+					<option th:selected="${{employee.tarSkill1Level}} eq '5'" value="5">5</option>
+					<option th:selected="${{employee.tarSkill1Level}} eq '6'" value="6">6</option>
+					<option th:selected="${{employee.tarSkill1Level}} eq '7'" value="7">7</option>
+					<option th:selected="${{employee.tarSkill1Level}} eq '8'" value="8">8</option>
+					<option th:selected="${{employee.tarSkill1Level}} eq '9'" value="9">9</option>
+					<option th:selected="${{employee.tarSkill1Level}} eq '10'" value="10">10</option>
 				</select><br> 元素战技：<select name="currSkill2Level">
-					<option value="1">1</option>
-					<option value="2">2</option>
-					<option value="3">3</option>
-					<option value="4">4</option>
-					<option value="5">5</option>
-					<option value="6">6</option>
-					<option value="7">7</option>
-					<option value="8">8</option>
-					<option value="9">9</option>
-					<option value="10">10</option>
+					<option th:selected="${{employee.currSkill2Level}} eq '1'" value="1">1</option>
+					<option th:selected="${{employee.currSkill2Level}} eq '2'" value="2">2</option>
+					<option th:selected="${{employee.currSkill2Level}} eq '3'" value="3">3</option>
+					<option th:selected="${{employee.currSkill2Level}} eq '4'" value="4">4</option>
+					<option th:selected="${{employee.currSkill2Level}} eq '5'" value="5">5</option>
+					<option th:selected="${{employee.currSkill2Level}} eq '6'" value="6">6</option>
+					<option th:selected="${{employee.currSkill2Level}} eq '7'" value="7">7</option>
+					<option th:selected="${{employee.currSkill2Level}} eq '8'" value="8">8</option>
+					<option th:selected="${{employee.currSkill2Level}} eq '9'" value="9">9</option>
+					<option th:selected="${{employee.currSkill2Level}} eq '10'" value="10">10</option>
 				</select> ~ <select name="tarSkill2Level">
-					<option value="1">1</option>
-					<option value="2">2</option>
-					<option value="3">3</option>
-					<option value="4">4</option>
-					<option value="5">5</option>
-					<option value="6">6</option>
-					<option value="7">7</option>
-					<option value="8">8</option>
-					<option value="9">9</option>
-					<option value="10">10</option>
+					<option th:selected="${{employee.tarSkill2Level}} eq '1'" value="1">1</option>
+					<option th:selected="${{employee.tarSkill2Level}} eq '2'" value="2">2</option>
+					<option th:selected="${{employee.tarSkill2Level}} eq '3'" value="3">3</option>
+					<option th:selected="${{employee.tarSkill2Level}} eq '4'" value="4">4</option>
+					<option th:selected="${{employee.tarSkill2Level}} eq '5'" value="5">5</option>
+					<option th:selected="${{employee.tarSkill2Level}} eq '6'" value="6">6</option>
+					<option th:selected="${{employee.tarSkill2Level}} eq '7'" value="7">7</option>
+					<option th:selected="${{employee.tarSkill2Level}} eq '8'" value="8">8</option>
+					<option th:selected="${{employee.tarSkill2Level}} eq '9'" value="9">9</option>
+					<option th:selected="${{employee.tarSkill2Level}} eq '10'" value="10">10</option>
 				</select><br> 元素爆发：<select name="currSkill3Level">
-					<option value="1">1</option>
-					<option value="2">2</option>
-					<option value="3">3</option>
-					<option value="4">4</option>
-					<option value="5">5</option>
-					<option value="6">6</option>
-					<option value="7">7</option>
-					<option value="8">8</option>
-					<option value="9">9</option>
-					<option value="10">10</option>
+					<option th:selected="${{employee.currSkill3Level}} eq '1'" value="1">1</option>
+					<option th:selected="${{employee.currSkill3Level}} eq '2'" value="2">2</option>
+					<option th:selected="${{employee.currSkill3Level}} eq '3'" value="3">3</option>
+					<option th:selected="${{employee.currSkill3Level}} eq '4'" value="4">4</option>
+					<option th:selected="${{employee.currSkill3Level}} eq '5'" value="5">5</option>
+					<option th:selected="${{employee.currSkill3Level}} eq '6'" value="6">6</option>
+					<option th:selected="${{employee.currSkill3Level}} eq '7'" value="7">7</option>
+					<option th:selected="${{employee.currSkill3Level}} eq '8'" value="8">8</option>
+					<option th:selected="${{employee.currSkill3Level}} eq '9'" value="9">9</option>
+					<option th:selected="${{employee.currSkill3Level}} eq '10'" value="10">10</option>
 				</select> ~ <select name="tarSkill3Level">
-					<option value="1">1</option>
-					<option value="2">2</option>
-					<option value="3">3</option>
-					<option value="4">4</option>
-					<option value="5">5</option>
-					<option value="6">6</option>
-					<option value="7">7</option>
-					<option value="8">8</option>
-					<option value="9">9</option>
-					<option value="10">10</option>
+					<option th:selected="${{employee.tarSkill3Level}} eq '1'" value="1">1</option>
+					<option th:selected="${{employee.tarSkill3Level}} eq '2'" value="2">2</option>
+					<option th:selected="${{employee.tarSkill3Level}} eq '3'" value="3">3</option>
+					<option th:selected="${{employee.tarSkill3Level}} eq '4'" value="4">4</option>
+					<option th:selected="${{employee.tarSkill3Level}} eq '5'" value="5">5</option>
+					<option th:selected="${{employee.tarSkill3Level}} eq '6'" value="6">6</option>
+					<option th:selected="${{employee.tarSkill3Level}} eq '7'" value="7">7</option>
+					<option th:selected="${{employee.tarSkill3Level}} eq '8'" value="8">8</option>
+					<option th:selected="${{employee.tarSkill3Level}} eq '9'" value="9">9</option>
+					<option th:selected="${{employee.tarSkill3Level}} eq '10'" value="10">10</option>
 				</select><br>
 				<button type="submit">计算</button>
 			</form>
